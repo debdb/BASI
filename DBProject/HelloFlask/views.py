@@ -7,8 +7,7 @@ from HelloFlask import app
 def gestoreHome():
     return render_template(
         "gestoreHome.html",
-        title = "gestoreHome",
-        content = "gestoreHome")
+        title = "gestoreHome" )
 
 
 
@@ -20,21 +19,18 @@ def get_data():
 def gestoreAddMovie():
     return render_template(
         "gestoreAddMovie.html",
-        title = "gestoreAddMovie",
-        content = "gestoreAddMovie")
+        title = "gestoreAddMovie")
 
 @app.route('/gestoreAnalytics')
 def gestoreAnalytics():
     return render_template(
         "gestoreAnalytics.html",
-        title = "gestoreAnalytics",
-        content = "gestoreAnalytics")
+        title = "gestoreAnalytics")
 
 
 @app.route('/gestoreUser')
 def gestoreUser():
     return render_template(
         "gestoreUser.html",
-        title = "gestoreUser",
-        content = "gestoreUser")
+        title = "gestoreUser")
 

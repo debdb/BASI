@@ -48,6 +48,9 @@
     <Content Include="HelloFlask\templates\gestoreHome.html">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="HelloFlask\templates\gestoreManageMovie.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="HelloFlask\templates\gestoreUser.html">
       <SubType>Code</SubType>
     </Content>
