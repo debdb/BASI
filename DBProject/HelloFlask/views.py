@@ -1,20 +1,28 @@
 from datetime import datetime
 from flask import render_template
 from HelloFlask import app
+from flask import Flask,render_template, request
 #from flask_mysqldb import MySQL
-
-
+ 
+app = Flask(__name__)
+ 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'root'
-app.config['MYSQL_DB'] = 'MyDB'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'cinema'
+ 
+mysql = MySQL(app)
 
-#mysql = MySQL(app)
-
-#mysql.init_app(app)
-#cursor = mysql.get_db().cursor()
-
-
+#Creating a connection cursor
+cursor = mysql.connection.cursor()
+ 
+#Executing SQL Statements
+#cursor.execute(CREATE TABLE table_name(field1, field2))
+cursor.execute(''' INSERT INTO table_name VALUES(v1,v2...) ''')
+cursor.execute(''' DELETE FROM table_name WHERE condition ''')
+ 
+#Saving the Actions performed on the DB
+mysql.connection.commit()
 
 
 
@@ -62,10 +70,10 @@ def gestoreAddMovie():
         hoursunday = details['hoursunday']
         coverphoto = details['coverphoto']
         available = details['available']
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO Movies(title, year, price, genre, duration, cast, description, monday, hourmonday, tuesday, hourtuesday, wednesday, hourwednesday, thusday, hourthuesday, friday, hourfriday, saturday, hoursaturday, sunday, hoursunday, coverphoto, available) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,  %s, %s, %s)", (title, year, price, genre, duration, cast, description, monday, hourmonday, tuesday, hourtuesday, wednesday, hourwednesday, thusday, hourthuesday, friday, hourfriday, saturday, hoursaturday, sunday, hoursunday, coverphoto, available))
+        cursor = mysql.connection.cursor()
+        cursor.execute("INSERT INTO Movies(title, year, price, genre, duration, cast, description, monday, hourmonday, tuesday, hourtuesday, wednesday, hourwednesday, thusday, hourthuesday, friday, hourfriday, saturday, hoursaturday, sunday, hoursunday, coverphoto, available) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,  %s, %s, %s)", (title, year, price, genre, duration, cast, description, monday, hourmonday, tuesday, hourtuesday, wednesday, hourwednesday, thusday, hourthuesday, friday, hourfriday, saturday, hoursaturday, sunday, hoursunday, coverphoto, available))
         mysql.connection.commit()
-        cur.close()
+        cursor.close()
         return 'success'
     return render_template(
         "gestoreAddMovie.html",
